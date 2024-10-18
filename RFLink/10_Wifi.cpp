@@ -345,10 +345,8 @@ namespace RFLink { namespace Wifi {
 
           configTzTime("UTC", RFLink::params::ntpServer);
 
-          #ifndef RFLINK_MQTT_DISABLED
           if(RFLink::Mqtt::params::enabled)
             RFLink::Mqtt::reconnect(1, true);
-          #endif // RFLINK_MQTT_DISABLED
           if(RFLink::Serial2Net::params::enabled)
             RFLink::Serial2Net::restartServer();
         }

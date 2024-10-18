@@ -27,8 +27,6 @@
 //#define RFLINK_AUTOOTA_ENABLED // if you want to the device to self-update at boot from a given URKL
                           // dont forget to set the URL in Crendentials.h
 
-//#define RFLINK_MQTT_DISABLED    // to disable MQTT entirely (not compiled at all)
-
 // WIFI
 #define WIFI_PWR_0 20 // 0~20.5dBm
 //#define RFLINK_SHOW_CONFIG_PORTAL_PIN_BUTTON 32 // if you want start the configuration portal with a button/pin

@@ -90,9 +90,7 @@ namespace RFLink {
 
       RFLink::Wifi::setup();
       RFLink::Portal::init();
-      #ifndef RFLINK_MQTT_DISABLED
       RFLink::Mqtt::setup_MQTT();
-      #endif // RFLINK_MQTT_DISABLED
       RFLink::Serial2Net::setup();
 
 
@@ -102,11 +100,6 @@ namespace RFLink {
       Radio::set_Radio_mode(Radio::Radio_OFF);
       Radio::show_Radio_Pin();
 
-
-#ifdef MQTT_ENABLED
-      //RFLink::Mqtt::publishMsg();
-#endif
-
       pbuffer[0] = 0;
       Radio::set_Radio_mode(Radio::Radio_RX);
 
@@ -115,9 +108,7 @@ namespace RFLink {
     }
 
     void mainLoop() {
-      #ifndef RFLINK_MQTT_DISABLED
       RFLink::Mqtt::checkMQTTloop();
-      #endif // RFLINK_MQTT_DISABLED
       RFLink::sendMsgFromBuffer();
       RFLink::Wifi::mainLoop();
 
@@ -149,10 +140,7 @@ namespace RFLink {
         Serial.print(pbuffer);
 #endif
 
-#ifndef RFLINK_MQTT_DISABLED
         RFLink::Mqtt::publishMsg();
-#endif // !RFLINK_MQTT_DISABLED
-
         RFLink::Serial2Net::broadcastMessage(pbuffer);
 
         pbuffer[0] = 0;

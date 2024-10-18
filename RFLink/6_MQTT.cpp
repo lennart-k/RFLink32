@@ -8,8 +8,6 @@
 #include <Arduino.h>
 #include "RFLink.h"
 
-#ifndef RFLINK_MQTT_DISABLED
-
 #include "3_Serial.h"
 #include "4_Display.h"
 #include "6_MQTT.h"
@@ -429,8 +427,3 @@ void triggerParamsHaveChanged() {
 
 
 }} // end of Mqtt namespace
-
-#endif // not RFLINK_MQTT_DISABLED
-
-
-

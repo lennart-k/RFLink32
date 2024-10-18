@@ -81,9 +81,7 @@ namespace RFLink { namespace Portal {
           RFLink::getStatusJsonString(obj);
 
           RFLink::Wifi::getStatusJsonString(obj);
-          #ifndef RFLINK_MQTT_DISABLED
           RFLink::Mqtt::getStatusJsonString(obj);
-          #endif // RFLINK_MQTT_DISABLED
           RFLink::Signal::getStatusJsonString(obj);
           RFLink::Serial2Net::getStatusJsonString(obj);
 
@@ -309,7 +307,6 @@ namespace RFLink { namespace Portal {
             //Serial.println(F("File Uploaded !"));
             // close the file handle as the upload is now done
 
-            #ifndef RFLINK_MQTT_DISABLED
             String desiredFilename('/' + request->getParam(F("filename"), false)->value());
             if(desiredFilename == Mqtt::mqtt_ca_cert_filename) {
               RFLink::Mqtt::triggerParamsHaveChanged();
@@ -321,7 +318,6 @@ namespace RFLink { namespace Portal {
               Serial.print(F("written filename:"));
               Serial.println(request->_tempFile.fullName());*/
             }
-            #endif
 
             request->_tempFile.close();
             request->send(200, F("text/plain"), F("File Uploaded !"));
