@@ -219,7 +219,7 @@ namespace RFLink
 
       counters::receivedSignalsCount++; // we have a signal, let's increment counters
 
-      byte signalWasDecoded = PluginRXCall(0, 0); // Check all plugins to see which plugin can handle the received signal.
+      byte signalWasDecoded = PluginRXCall(); // Check all plugins to see which plugin can handle the received signal.
       if (signalWasDecoded)
       { // Check all plugins to see which plugin can handle the received signal.
         counters::successfullyDecodedSignalsCount++;
@@ -603,7 +603,7 @@ namespace RFLink
 
         Serial.printf_P(PSTR("Sending your signal to Plugins (%i pulses)\r\n"), RawSignal.Number);
 
-        if (!PluginRXCall(0, 0)){
+        if (!PluginRXCall()){
           Serial.println(F("No plugin has matched your signal"));
         }
         else
@@ -625,7 +625,7 @@ namespace RFLink
           displaySignal(RawSignal);
           RawSignal.readyForDecoder = true;
 
-          if (!PluginRXCall(0, 0)) {
+          if (!PluginRXCall()) {
             Serial.println(F("No plugin has matched your signal"));
           }
           else {

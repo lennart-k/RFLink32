@@ -41,8 +41,6 @@
 #define PLUGIN_013 // Powerfix/Quigg
 #define PLUGIN_014 // Ikea Koppla
 #define PLUGIN_015 // Home Easy EU
-#define PLUGIN_017 // RTS
-#define PLUGIN_016 // Silvercrest
 // -------------------
 // Weather sensors
 // -------------------
@@ -73,10 +71,6 @@
 #define PLUGIN_081 // Mertik Maxitrol / Dru fireplace
 #define PLUGIN_082 // Mertik Maxitrol / Dru fireplace
 // -------------------
-// Misc
-// -------------------
-#define PLUGIN_076 // CAME-TOP432 Gate/Door opener
-// -------------------
 // 868 MHZ
 // -------------------
 // -------------------
@@ -104,22 +98,12 @@
 // #define PLUGIN_TX_012           // Flamingo FA500R  (11)
 // #define PLUGIN_TX_013           // Powerfix/Quigg
 // #define PLUGIN_TX_015           // Home Easy EU     (14)
-#define PLUGIN_TX_017           // RTS
-#define PLUGIN_TX_016           // Silvercrest
 // -------------------
 // Smoke detectors
 // -------------------
 // #define PLUGIN_TX_080           // Flamingo FA20 / KD101 smoke detector
 // #define PLUGIN_TX_082           // Mertik Maxitrol / Dru fireplace
 // -------------------
-// -------------------
-// Alarm Systems
-// -------------------
-#define PLUGIN_TX_087
-// -------------------
-// Misc
-// -------------------
-#define PLUGIN_TX_076               // CAME TOP-432 Door Opener
 // -------------------
 //       -=#=-
 // -------------------

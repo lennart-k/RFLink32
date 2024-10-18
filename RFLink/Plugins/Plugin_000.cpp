@@ -21,7 +21,8 @@ namespace PluginRaw
 
       for (int i = 1; i < signal.Number + 1; i++)
       {
-         RFLink::sendRawPrint(signal.Pulses[i] * signal.Multiply);
+         sprintf(dbuffer, "%02x", signal.Pulses[i]);
+         RFLink::sendRawPrint(dbuffer);
          if (i < signal.Number)
             RFLink::sendRawPrint(',');
       }

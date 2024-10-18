@@ -37,5 +37,5 @@ void PluginInit();
 void PluginTXInit();
 byte PluginInitCall(byte Function, char *str);
 byte PluginTXInitCall(byte Function, char *str);
-byte PluginRXCall(byte Function, const char *str);
+byte PluginRXCall();
 byte PluginTXCall(byte Function, const char *str);
