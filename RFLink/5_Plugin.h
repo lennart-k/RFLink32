@@ -19,14 +19,12 @@ enum PState
 };
 
 extern boolean (*Plugin_ptr[PLUGIN_MAX])(byte, const char *); // Receive plugins
-extern byte Plugin_id[PLUGIN_MAX];
 extern byte Plugin_State[PLUGIN_MAX];
 #ifndef ARDUINO_AVR_UNO // Optimize memory limit to 2048 bytes on arduino uno
 extern const char* Plugin_Description[PLUGIN_MAX];
 #endif
 
 extern boolean (*PluginTX_ptr[PLUGIN_TX_MAX])(byte, const char *); // Transmit plugins
-extern byte PluginTX_id[PLUGIN_TX_MAX];
 extern byte PluginTX_State[PLUGIN_TX_MAX];
 
 extern boolean RFDebug;   // debug RF signals with plugin 001 (no decode)

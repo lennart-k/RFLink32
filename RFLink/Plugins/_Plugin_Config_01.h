@@ -17,6 +17,9 @@
 #include "2_Signal.h"
 #include "1_Radio.h"
 
+#define PLUGIN_000 // Raw signal
+#define PLUGIN_TX_000 // Raw signal
+
 // ****************************************************************************************************************************************
 // Translation Plugin for oversized packets due to their breaks/pause being too short between packets
 // Used for Flamingo FA500R and various others, do NOT exclude this plugin.
@@ -64,29 +67,11 @@
 #define PLUGIN_049 // Lacrosse TX141
 #define PLUGIN_050 // FineOffset WH2 / ClimeMet CM9088 Temperature/Humidity
 // -------------------
-// Motion Sensors, include when needed
-// -------------------
-#define PLUGIN_060 // Ajax Chubb Varel 433 MHz. motion sensors
-#define PLUGIN_061 // Chinese PIR motion door and window sensors
-#define PLUGIN_062 // Chuango Alarm Devices
-#define PLUGIN_063 // Oregon PIR/ALARM/LIGHT
-#define PLUGIN_064 // Atlantic (and Visonic)
-// -------------------
-// Doorbells
-// -------------------
-#define PLUGIN_070 // Select Plus (Action - Quhwa)
-#define PLUGIN_071 // Plieger York
-#define PLUGIN_072 // Byron SX doorbell
-#define PLUGIN_073 // Deltronic doorbell
-#define PLUGIN_074 // RL02
-#define PLUGIN_075 // Silvercrest
-// -------------------
 // Smoke detectors / Fire Places
 // -------------------
 #define PLUGIN_080 // Flamingo FA20 / KD101 smoke detector
 #define PLUGIN_081 // Mertik Maxitrol / Dru fireplace
 #define PLUGIN_082 // Mertik Maxitrol / Dru fireplace
-#define PLUGIN_087 // NOX Alarm
 // -------------------
 // Misc
 // -------------------
@@ -121,13 +106,6 @@
 // #define PLUGIN_TX_015           // Home Easy EU     (14)
 #define PLUGIN_TX_017           // RTS
 #define PLUGIN_TX_016           // Silvercrest
-// -------------------
-// Doorbells
-// -------------------
-// #define PLUGIN_TX_070           // Select Plus (Action - Quhwa)
-// #define PLUGIN_TX_072           // Byron SX doorbell
-// #define PLUGIN_TX_073           // Deltronic doorbell
-// #define PLUGIN_TX_074           // RL02
 // -------------------
 // Smoke detectors
 // -------------------
