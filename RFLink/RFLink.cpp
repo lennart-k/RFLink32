@@ -25,7 +25,6 @@
 #include "4_Display.h"
 #include "5_Plugin.h"
 #include "6_MQTT.h"
-#include "8_OLED.h"
 #include "9_Serial2Net.h"
 #include "10_Wifi.h"
 #include "11_Config.h"
@@ -96,9 +95,6 @@ namespace RFLink {
 #ifdef SERIAL_ENABLED
       Serial.print(pbuffer);
 #endif
-#ifdef OLED_ENABLED
-      splash_OLED();
-#endif
 
 #if defined(ESP32) || (ESP8266)
       RFLink::Config::setup();
@@ -126,10 +122,6 @@ namespace RFLink {
 #if defined(ESP8266) || defined(ESP32)
       Radio::show_Radio_Pin();
 #endif // ESP8266 || ESP32
-
-#ifdef OLED_ENABLED
-      setup_OLED();
-#endif
 
 
 #ifdef MQTT_ENABLED
@@ -198,10 +190,6 @@ namespace RFLink {
 #ifndef RFLINK_SERIAL2NET_DISABLED
         RFLink::Serial2Net::broadcastMessage(pbuffer);
 #endif // !RFLINK_SERIAL2NET_DISABLED
-
-#ifdef OLED_ENABLED
-        print_OLED();
-#endif
 
         pbuffer[0] = 0;
       }

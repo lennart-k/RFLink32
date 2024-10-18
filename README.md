@@ -54,15 +54,6 @@ The recommended pin assignments are:
 
 ¹ *These must be configured in the web portal, values suggested here are proven to work reliably.*
 
-## 3. OLED display
-
-You can use an OLED display.
-We used a SSD1306 128x64 I2C screen in our tests.
-
-**This is highly experimental** and therefore not enabled by default.
-
-![OLED](pictures/RFLink-ESP_OLED_2.jpg "A picture of a breadboard with an ESP and OLED display wired up. There is text showing on the OLED screen.")
-
 ## 4. IDE
 
 We strongly recommend using the [PlatformIO IDE](https://platformio.org/install) but you can alternatively use the [Arduino IDE 1.8.10](https://www.arduino.cc/en/Guide/HomePage).
@@ -76,7 +67,6 @@ We use [Arduino Core for ESP8266](https://github.com/esp8266/Arduino).
 In addition to the core libraries, the following are also in use:
 
 - PubSubClient for MQTT messaging https://github.com/knolleary/pubsubclient
-- u8g2/u8x8 library for OLED display https://github.com/olikraus/u8g2
 
 ## 7. Compile Options and Flags
 
