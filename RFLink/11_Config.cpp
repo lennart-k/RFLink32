@@ -1,13 +1,7 @@
 #include "11_Config.h"
 #include <assert.h>
-
-#ifdef ESP8266
-#include <LittleFS.h>
-#else
 #include <FS.h>
 #include <LittleFS.h>
-#endif
-
 #include "1_Radio.h"
 #include "2_Signal.h"
 #include "6_MQTT.h"
@@ -50,27 +44,19 @@ namespace RFLink
     static_assert(sizeof(jsonSections) / sizeof(char *) == SectionId::EOF_id + 1, "jsonSections has missing/extra sections names, please compare with SectionId enum declations");
 
     ConfigItem *configItemLists[] = {
-#if defined(RFLINK_WIFI_ENABLED)
             &RFLink::Wifi::configItems[0],
             #ifndef RFLINK_MQTT_DISABLED
             &RFLink::Mqtt::configItems[0],
             #endif // RFLINK_MQTT_DISABLED
             &RFLink::Serial2Net::configItems[0],
-            #ifndef RFLINK_PORTAL_DISABLED
             &RFLink::Portal::configItems[0],
-            #endif // RFLINK_PORTAL_DISABLED
-#endif
             &RFLink::Signal::configItems[0],
             &RFLink::Radio::configItems[0],
     };
 #define configItemListsSize (sizeof(configItemLists) / sizeof(ConfigItem *))
 
     #ifndef RFLINK_CONFIG_JSON_BUFFER_SIZE
-      #ifdef ESP8266
-        #define RFLINK_CONFIG_JSON_BUFFER_SIZE 2200
-      #else
-        #define RFLINK_CONFIG_JSON_BUFFER_SIZE 4096
-      #endif
+      #define RFLINK_CONFIG_JSON_BUFFER_SIZE 4096
     #endif
 
     StaticJsonDocument<RFLINK_CONFIG_JSON_BUFFER_SIZE> doc; // Current config's JSON document
@@ -137,25 +123,13 @@ namespace RFLink
     {
       Serial.print(F("Loading persistent filesystem... "));
 
-      #ifdef ESP32
       if (!LittleFS.begin(true))
-      #else
-      if( !LittleFS.begin())
-      #endif
       {
         Serial.println(F(" FAILED!!"));
         return;
       }
       Serial.print(F("OK. "));
-
-#ifdef ESP32
       Serial.printf_P(PSTR("File system usage: %u/%uKB.\r\n"), LittleFS.usedBytes() / 1024, LittleFS.totalBytes() / 1024);
-#else // this is ESP8266
-      FSInfo info;
-      LittleFS.info(info);
-      Serial.printf_P(PSTR("File system usage: %u/%uKB.\r\n"), info.usedBytes / 1024, info.totalBytes / 1024);
-#endif
-
 
       for (unsigned int i = 0; i < configItemListsSize; i++)
       {
@@ -678,18 +652,13 @@ namespace RFLink
 
     bool saveConfigToFlash()
     {
-      if(Signal::AsyncSignalScanner::isEnabled())
-        Signal::AsyncSignalScanner::stopScanning();
+      Signal::AsyncSignalScanner::stopScanning();
 
       Serial.print(F("Saving JSON config to FLASH.... "));
 
       if (LittleFS.exists(F("/tmp.json")))
         LittleFS.remove(F("/tmp.json"));
-      #ifdef ESP32
       File file = LittleFS.open(F("/tmp.json"), "w", true);
-      #else
-      File file = LittleFS.open(F("/tmp.json"), "w");
-      #endif
 
       auto bytes_written = serializeJson(doc, file);
       file.close();
@@ -697,8 +666,7 @@ namespace RFLink
       if (bytes_written == 0)
       {
         Serial.println(F("failed!"));
-        if(Signal::AsyncSignalScanner::isEnabled())
-          Signal::AsyncSignalScanner::startScanning();
+        Signal::AsyncSignalScanner::startScanning();
         return false;
       }
       else
@@ -709,8 +677,7 @@ namespace RFLink
         Serial.println(F("OK"));
       }
 
-      if(Signal::AsyncSignalScanner::isEnabled())
-        Signal::AsyncSignalScanner::startScanning();
+      Signal::AsyncSignalScanner::startScanning();
 
       return true;
     }

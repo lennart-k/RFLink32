@@ -28,12 +28,8 @@
                           // dont forget to set the URL in Crendentials.h
 
 //#define RFLINK_MQTT_DISABLED    // to disable MQTT entirely (not compiled at all)
-//#define RFLINK_PORTAL_DISABLED    // to disable Portal/Web UI
-
-#if (defined(ESP32) || defined(ESP8266))
 
 // WIFI
-//#define RFLINK_WIFI_ENABLED
 #define WIFI_PWR_0 20 // 0~20.5dBm
 //#define RFLINK_SHOW_CONFIG_PORTAL_PIN_BUTTON 32 // if you want start the configuration portal with a button/pin
 #ifndef RFLINK_WIFIMANAGER_PORTAL_LONG_PRESS
@@ -57,8 +53,6 @@
   #define RFLink_default_MQTT_LWT true
 #endif
 // #define CHECK_CACERT       // Send MQTT SSL CA Certificate
-
-#endif // (defined(ESP32) || defined(ESP8266))
 
 // Debug default
 #define RFDebug_0 false   // debug RF signals with plugin 001 (no decode)

@@ -1,5 +1,3 @@
-#if defined(RFLINK_WIFI_ENABLED)
-
 #include "RFLink.h"
 #include <Arduino.h>
 
@@ -12,14 +10,10 @@
 #include "6_MQTT.h"
 #include "9_Serial2Net.h"
 #include <time.h> // for NTP
-#ifdef ESP32
 extern "C" {
   #include "bootloader_random.h"
 }
 #include "esp_sntp.h"
-#else // NOT ESP32
-  #include <ESP8266TrueRandom.h>
-#endif // ESP32
 
 
 #ifdef RFLINK_AUTOOTA_ENABLED
@@ -236,11 +230,7 @@ namespace RFLink { namespace Wifi {
             Serial.print(params::client_ssid.c_str());
             Serial.println(F(". A status will be given whenever it occurs."));
 
-#ifdef ESP32
             WiFi.setHostname(params::client_hostname.c_str());
-#else
-            WiFi.hostname(params::client_hostname);
-#endif
 
             if( !params::client_dhcp_enabled) {
               IPAddress ip, gateway, mask, dns;
@@ -285,11 +275,7 @@ namespace RFLink { namespace Wifi {
           }
 
           if( params::AP_enabled ) {
-            #ifdef ESP32
             WiFi.setHostname(params::client_hostname.c_str());
-            #else
-            WiFi.hostname(params::client_hostname);
-            #endif
             Serial.printf_P(PSTR("* WIFI AP starting with SSID '%s' and band=%i... "), params::AP_ssid.c_str(), cpWifiChannel);
             if( !WiFi.softAP(params::AP_ssid.c_str(), params::AP_password.c_str()))
               Serial.println(F("FAILED"));
@@ -318,31 +304,8 @@ namespace RFLink { namespace Wifi {
         {
           WiFi.persistent(false);
           WiFi.setAutoReconnect(false);
-#ifdef ESP8266
-          WiFi.setSleepMode(WIFI_MODEM_SLEEP);
-#endif
           WiFi.mode(WIFI_OFF);
-#ifdef ESP8266
-          WiFi.forceSleepBegin();
-#endif
         }
-
-        #ifdef ESP8266
-        /*bool getLocalTime(struct tm * info, uint32_t ms=5000)
-        {
-            uint32_t start = millis();
-            time_t now;
-            while((millis()-start) <= ms) {
-                time(&now);
-                localtime_r(&now, info);
-                if(info->tm_year > (2016 - 1900)){
-                    return true;
-                }
-                delay(10);
-            }
-            return false;
-        }*/
-        #endif
 
         void printLocalTime(struct timeval *newTime = nullptr)
         {
@@ -376,11 +339,9 @@ namespace RFLink { namespace Wifi {
         }
 
         void reconnectServices() {
-          #ifdef ESP32
           // the following was commented out so ESP8266 and ESP32 behave the same
           // in case NTP forces a time drift we need to recalculate timeAtBoot
           //sntp_set_time_sync_notification_cb(ntpUpdateCallback);
-          #endif
 
           configTzTime("UTC", RFLink::params::ntpServer);
 
@@ -392,9 +353,7 @@ namespace RFLink { namespace Wifi {
             RFLink::Serial2Net::restartServer();
         }
 
-#ifdef ESP32
         void eventHandler_WiFiStationConnected(WiFiEvent_t event, WiFiEventInfo_t info) {
-
           Serial.print(F("Connected to AP SSID:"));
           for(int i=0; i<info.wifi_sta_connected.ssid_len; i++){
             Serial.print((char) info.wifi_sta_connected.ssid[i]);
@@ -425,32 +384,6 @@ namespace RFLink { namespace Wifi {
         void eventHandler_WiFiStationLostIp(WiFiEvent_t event, WiFiEventInfo_t info) {
           Serial.println("WiFi Client has lost its IP");
         }
-#endif //ESP32
-
-#ifdef ESP8266
-WiFiEventHandler e1;
-void eventHandler_WiFiStationConnected(const WiFiEventSoftAPModeStationConnected& evt) {
-  Serial.println(F("Connected to AP!"));
- 
-  Serial.print(F("SSID: "));
-  Serial.println(WiFi.SSID());
-     
-  Serial.print(F("\r\nChannel: "));
-  Serial.println(WiFi.channel());
-    
-}
-WiFiEventHandler e2;
-void eventHandler_WiFiStationGotIp(const WiFiEventStationModeGotIP& evt) {
-  Serial.printf_P(PSTR("WiFi Client has received a new IP: %s\r\n"), WiFi.localIP().toString().c_str());
-  Serial.flush();
-  reconnectServices();
-}
-WiFiEventHandler e3;
-void eventHandler_WiFiStationDisconnected(const WiFiEventStationModeDisconnected& evt) {
-  Serial.println(F("WiFi Client has been disconnected"));
-}
-#endif
-
 
         bool clientNetworkIsUp() {
           return WiFi.isConnected();
@@ -462,34 +395,18 @@ void eventHandler_WiFiStationDisconnected(const WiFiEventStationModeDisconnected
 
         void setup()
         {
-          #ifdef ESP32
           bootloader_random_enable();
           cpWifiChannel = esp_random()%13 + 1;
           bootloader_random_disable();
-          #else
-          cpWifiChannel = ESP8266TrueRandom.random(1,13);
-          #endif // ESP32
 
           refreshClientParametersFromConfig(false);
           refreshAccessPointParametersFromConfig(false);
 
-#ifdef ESP32
           WiFi.onEvent(eventHandler_WiFiStationConnected, ARDUINO_EVENT_WIFI_STA_CONNECTED );
           WiFi.onEvent(eventHandler_WiFiStationGotIp, ARDUINO_EVENT_WIFI_STA_GOT_IP );
           WiFi.onEvent(eventHandler_WiFiStationLostIp, ARDUINO_EVENT_WIFI_STA_LOST_IP );
-#else
-          e1 = WiFi.onSoftAPModeStationConnected(&eventHandler_WiFiStationConnected);
-          e2 = WiFi.onStationModeGotIP(&eventHandler_WiFiStationGotIp);
-          e3 = WiFi.onStationModeDisconnected(&eventHandler_WiFiStationDisconnected);
-#endif
 
-#ifdef ESP32
           WiFi.setTxPower(WIFI_POWER_11dBm);
-#elif ESP8266
-          WiFi.setSleepMode(WIFI_MODEM_SLEEP);
-  WiFi.setOutputPower(WIFI_PWR.toInt());
-#endif // ESP
-
           start_WIFI();
 
 #ifdef RFLINK_OTA_ENABLED
@@ -537,7 +454,6 @@ void eventHandler_WiFiStationDisconnected(const WiFiEventStationModeDisconnected
 
             Serial.println(F("Applying new Wifi AP settings"));
 
-            #ifdef ESP32
             bool isEnabled = ((WiFi.getMode() & WIFI_MODE_AP) != 0);
 
             if(params::AP_enabled) {
@@ -552,20 +468,6 @@ void eventHandler_WiFiStationDisconnected(const WiFiEventStationModeDisconnected
               Serial.println("Shutting down AP");
               WiFi.enableAP(false);
             }
-            #endif
-            #ifdef ESP8266
-            if(params::AP_enabled) {
-                Serial.printf_P(PSTR("* WIFI AP starting with SSID '%s'... "), params::AP_ssid.c_str());
-                WiFi.enableAP(true);
-                if( !WiFi.softAP(params::AP_ssid.c_str(), params::AP_password.c_str()), cpWifiChannel )
-                  Serial.println(F("WIFI AP start FAILED"));
-                else
-                  Serial.println(F("WIFI AP started"));
-            } else {
-              Serial.println(F("Shutting down AP"));
-              WiFi.enableAP(false);
-            }
-            #endif
           } // end of accessPointParamsHaveChanges
 
           if( clientParamsHaveChanged ) {
@@ -613,6 +515,3 @@ void eventHandler_WiFiStationDisconnected(const WiFiEventStationModeDisconnected
 
 
 } // end RFLink namespace
-
-#endif // RFLINK_WIFI_ENABLED
-

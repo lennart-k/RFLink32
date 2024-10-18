@@ -112,7 +112,6 @@ Reference:
 | signal  | signal_end_timeout  | Number       | After this time (in microseconds) the signal will be interpreted as completed                       |
 | signal  | signal_repeat_time  | Number       | Time in milliseconds in which the same signal should not be accepted, for filtering out retransmits |
 | signal  | scan_high_time      | Number       | RF listen time in milliseconds                                                                      |
-| signal  | async_mode_enabled  | Boolean      |                                                                                                     |
 | radio   | hardware            | Enumeration  | Possible Values: `generic` `RFM69CW` `RFM69HCW` `SX1276` `SX1278` `CC1101`                          |
 | radio   | rx_data             | Number       | Receiver Data Pin                                                                                   |
 | radio   | rx_vcc              | Number       | Receiver Power Pin                                                                                  |
@@ -171,8 +170,7 @@ JSON Output:
     "min_pulse_len": 50,
     "signal_end_timeout": 5000,
     "signal_repeat_time": 250,
-    "scan_high_time": 50,
-    "async_mode_enabled": false
+    "scan_high_time": 50
   },
   "radio": {
     "hardware": "generic",

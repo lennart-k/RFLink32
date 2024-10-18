@@ -1,7 +1,4 @@
-#ifndef _9_Serial2Net_H_
-#define  _9_Serial2Net_H_
-
-#ifndef RFLINK_SERIAL2NET_DISABLED
+#pragma once
 
 #ifndef SERIAL2NET_PORT
 #define SERIAL2NET_PORT 1900
@@ -48,6 +45,3 @@ namespace RFLink {
         void getStatusJsonString(JsonObject &output);
     }
 }
-
-#endif // !RFLINK_SERIAL2NET_DISABLED
-#endif // _9_Serial2Net_H_

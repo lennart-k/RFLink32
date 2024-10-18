@@ -498,7 +498,6 @@ namespace RFLink { namespace Radio  {
       }
     }
 
-#if (defined(ESP8266) || defined(ESP32))
     void show_Radio_Pin()
     {
       if (pins::RX_PMOS != NOT_A_PIN)
@@ -577,7 +576,6 @@ namespace RFLink { namespace Radio  {
         Serial.println(GPIO2String(pins::TX_NA));
       }
     }
-#endif // ESP8266 || ESP32
 
     void set_Radio_mode(States new_State, bool force)
     {
@@ -617,15 +615,13 @@ namespace RFLink { namespace Radio  {
       if (pins::PULLUP_RX_DATA)
         setPinMode(pins::RX_DATA, INPUT_PULLUP); // Initialise in/output ports
       delayMicroseconds(TRANSMITTER_STABLE_DELAY_US);
-      if(RFLink::Signal::params::async_mode_enabled)
-        RFLink::Signal::AsyncSignalScanner::startScanning();
+      RFLink::Signal::AsyncSignalScanner::startScanning();
 
     }
 
     void disableRX_generic()
     {
-      if( RFLink::Signal::params::async_mode_enabled )
-        RFLink::Signal::AsyncSignalScanner::stopScanning();
+      RFLink::Signal::AsyncSignalScanner::stopScanning();
 
       // RX pins
       setPinMode(pins::RX_DATA, INPUT);
@@ -679,8 +675,7 @@ namespace RFLink { namespace Radio  {
         switch (new_State)
         {
           case Radio_OFF: {
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::stopScanning();
+            RFLink::Signal::AsyncSignalScanner::stopScanning();
 
             auto success = radio_SX1278->standby();
             if(success != 0) {
@@ -700,16 +695,14 @@ namespace RFLink { namespace Radio  {
 
             setPinMode(pins::RX_DATA, INPUT);
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::startScanning();
+            RFLink::Signal::AsyncSignalScanner::startScanning();
 
             break;
           }
 
           case Radio_TX: {
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::stopScanning();
+            RFLink::Signal::AsyncSignalScanner::stopScanning();
 
             setPinMode(pins::TX_DATA, OUTPUT);
 
@@ -744,8 +737,7 @@ namespace RFLink { namespace Radio  {
         switch (new_State)
         {
           case Radio_OFF: {
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::stopScanning();
+            RFLink::Signal::AsyncSignalScanner::stopScanning();
 
             auto success = radio_SX1276->standby();
             if(success != 0) {
@@ -765,16 +757,14 @@ namespace RFLink { namespace Radio  {
 
             setPinMode(pins::RX_DATA, INPUT);
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::startScanning();
+            RFLink::Signal::AsyncSignalScanner::startScanning();
 
             break;
           }
 
           case Radio_TX: {
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::stopScanning();
+            RFLink::Signal::AsyncSignalScanner::stopScanning();
 
             setPinMode(pins::TX_DATA, OUTPUT);
 
@@ -809,8 +799,7 @@ namespace RFLink { namespace Radio  {
         switch (new_State)
         {
           case Radio_OFF: {
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::stopScanning();
+            RFLink::Signal::AsyncSignalScanner::stopScanning();
 
             auto success = radio_RFM69->standby();
             if(success != 0 ){
@@ -836,16 +825,14 @@ namespace RFLink { namespace Radio  {
 
             setPinMode(pins::RX_DATA, INPUT);
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::startScanning();
+            RFLink::Signal::AsyncSignalScanner::startScanning();
 
             break;
           }
 
           case Radio_TX: {
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::stopScanning();
+            RFLink::Signal::AsyncSignalScanner::stopScanning();
 
             setPinMode(pins::TX_DATA, OUTPUT);
 
@@ -880,8 +867,7 @@ namespace RFLink { namespace Radio  {
           case Radio_OFF: {
             ::detachInterrupt(digitalPinToInterrupt(pins::RX_NA));
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::stopScanning();
+            RFLink::Signal::AsyncSignalScanner::stopScanning();
 
             auto success = radio_CC1101->standby();
             if(success != 0 ){
@@ -901,16 +887,14 @@ namespace RFLink { namespace Radio  {
 
             pinMode(pins::RX_DATA, INPUT);
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::startScanning();
+            RFLink::Signal::AsyncSignalScanner::startScanning();
 
             break;
           }
 
           case Radio_TX: {
 
-            if( RFLink::Signal::params::async_mode_enabled )
-              RFLink::Signal::AsyncSignalScanner::stopScanning();
+            RFLink::Signal::AsyncSignalScanner::stopScanning();
 
             pinMode(pins::TX_DATA, OUTPUT);
 

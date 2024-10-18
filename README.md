@@ -1,6 +1,6 @@
 # RFLink ESP
 
-This is a Radio Frequency to MQTT/Serial/TCP gateway built for ESP32 and ESP8266 boards (see #MCU for more).
+This is a Radio Frequency to MQTT/Serial/TCP gateway built for ESP32 boards (see #MCU for more).
 
 It receives and decodes OOK 433MHz signals from your sensors, alarms and pushes them over MQTT/TCP/Serial.
 For some devices it can also send commands to control them.
@@ -18,8 +18,6 @@ This fork provides additional features:
 
 We extensively use ESP32 dev kits.
 This is the default settings in `Platformio.ini` and `RFLink.h` files.
-
-You may also use other ESP8266/ESP8255 based boards when there are no pin limitations. NodeMCUv2 is known to work.
 
 ## 2. Receiver / Transmitter / Transceiver
 

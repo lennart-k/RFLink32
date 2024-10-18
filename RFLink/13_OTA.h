@@ -1,6 +1,4 @@
-#ifndef _13_OTA_H_
-#define _13_OTA_H_
-
+#pragma once
 #include <WString.h>
 #include <ArduinoJson.h>
 
@@ -30,5 +28,3 @@ namespace RFLink
 
   }
 } // end of RFLink namespace
-
-#endif // _13_OTA_H_

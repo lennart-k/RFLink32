@@ -4,10 +4,7 @@
 // * 2018..2020 Stormteam - Marc RIVES * //
 // * More details in RFLink.ino file   * //
 // ************************************* //
-
-#ifndef Serial_h
-#define Serial_h
-
+#pragma once
 #include <Arduino.h>
 
 #define BAUD 115200            // 57600      // Baudrate for serial communication.
@@ -23,4 +20,3 @@ void resetSerialBuffer();
 
 boolean readSerialAndExecute();
 boolean CheckMQTT(byte *);
-#endif

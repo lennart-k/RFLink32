@@ -54,7 +54,7 @@ While this procedure is not supposed to overwrite your existing configuration, w
 
 ### Using Espressif's official tool
 
-Download [Flash Download Tools](https://www.espressif.com/en/support/download/other-tools)  (ESP8266, ESP32, ESP32-S2)
+Download [Flash Download Tools](https://www.espressif.com/en/support/download/other-tools)  (ESP32, ESP32-S2)
 
 If you want to flash firmware for a Sonoff RF Bridge then [follow this guide](doc/sonoff_rf_bridge.md).
 

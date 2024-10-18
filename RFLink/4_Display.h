@@ -4,9 +4,7 @@
 // * 2018..2020 Stormteam - Marc RIVES * //
 // * More details in RFLink.ino file   * //
 // ************************************* //
-
-#ifndef Misc_h
-#define Misc_h
+#pragma once
 
 #include <Arduino.h>
 
@@ -137,9 +135,5 @@ int str2cmd(const char *);
 
 void replacechar(char *, char, char);
 
-#if (defined(ESP8266) || defined(ESP32))
 uint8_t String2GPIO(String);
 String GPIO2String(uint8_t uGPIO);
-#endif // ESP8266 || ESP32
-
-#endif

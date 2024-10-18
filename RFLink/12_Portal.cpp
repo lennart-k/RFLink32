@@ -1,11 +1,11 @@
 #include "RFLink.h"
 
-#ifndef RFLINK_PORTAL_DISABLED
-
 #include <ESPAsyncWebServer.h>
 #include <AsyncJson.h>
 #include <index.html.gz.h>
 #include <LittleFS.h>
+#include "AsyncTCP.h"
+#include "Update.h"
 
 #include "2_Signal.h"
 #include "6_MQTT.h"
@@ -15,16 +15,6 @@
 #include "10_Wifi.h"
 #include "13_OTA.h"
 
-#if defined(ESP8266)
-#include "ESP8266WiFi.h"
-#include "ESPAsyncTCP.h"
-#include "flash_hal.h"
-#include "FS.h"
-#elif defined(ESP32)
-#include "AsyncTCP.h"
-#include "Update.h"
-#endif
-#include <LittleFS.h>
 
 namespace RFLink { namespace Portal {
 
@@ -239,16 +229,8 @@ namespace RFLink { namespace Portal {
             //    return request->send(400, "text/plain", "MD5 parameter invalid");
             //}
 
-#if defined(ESP8266)
-            int cmd = (filename == "filesystem") ? U_FS : U_FLASH;
-            Update.runAsync(true);
-            size_t fsSize = ((size_t) &_FS_end - (size_t) &_FS_start);
-            uint32_t maxSketchSpace = (ESP.getFreeSketchSpace() - 0x1000) & 0xFFFFF000;
-            if (!Update.begin((cmd == U_FS)?fsSize:maxSketchSpace, cmd)){ // Start with max available size
-#elif defined(ESP32)
               int cmd = (filename == "filesystem") ? U_SPIFFS : U_FLASH;
         if (!Update.begin(UPDATE_SIZE_UNKNOWN, cmd)) { // Start with max available size
-#endif
               Update.printError(Serial);
               return request->send(400, F("text/plain"), F("OTA could not begin"));
             }
@@ -305,11 +287,7 @@ namespace RFLink { namespace Portal {
             }
             String desiredFilename = request->getParam(F("filename"), false)->value();
             Serial.println(desiredFilename);
-            #ifdef ESP32
             auto file = request->_tempFile = LittleFS.open(String('/' + desiredFilename), "w", true);
-            #else
-            auto file = request->_tempFile = LittleFS.open(String('/' + desiredFilename), "w");
-            #endif
 
             if(!file) {
               //Serial.println(F("failed to open file for writing"));
@@ -454,5 +432,3 @@ namespace RFLink { namespace Portal {
 
     } // end of Portal namespace
 } // end of RFLink namespace
-
-#endif // RFLINK_PORTAL_DISABLED

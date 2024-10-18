@@ -38,15 +38,11 @@
 //****************************************************************************************************************************************
 void sendMsgFromBuffer(); // See at bottom
 
-#if (defined(ESP8266) || defined(ESP32))
-
 void CallReboot(void) {
   RFLink::sendMsgFromBuffer();
   delay(1);
   ESP.restart();
 }
-
-#endif
 
 namespace RFLink {
 
@@ -71,19 +67,11 @@ namespace RFLink {
         Serial.println(F("Failed to obtain time"));
       }
 
-#if (defined(ESP32) || defined(ESP8266))
       Serial.println(); // ESP "Garbage" message
       Serial.print(F("Arduino IDE Version :\t"));
       Serial.println(ARDUINO);
-#endif
-#ifdef ESP32
       Serial.print(F("ESP SDK version:\t"));
       Serial.println(ESP.getSdkVersion());
-#endif
-#ifdef ESP8266
-      Serial.print(F("ESP CoreVersion :\t"));
-      Serial.println(ESP.getCoreVersion());
-#endif // ESP8266
       Serial.print(F("Sketch File :\t\t"));
       Serial.println(F(__FILE__)); // "RFLink.ino" version is in 20;00 Message
       Serial.println(F("Compiled on :\t\t" __DATE__ " at " __TIME__));
@@ -96,32 +84,22 @@ namespace RFLink {
       Serial.print(pbuffer);
 #endif
 
-#if defined(ESP32) || (ESP8266)
       RFLink::Config::setup();
-#endif
       RFLink::Radio::setup();
-      RFLink::Signal::setup();
 
-#if defined(RFLINK_WIFI_ENABLED)
       RFLink::Wifi::setup();
-      #ifndef RFLINK_PORTAL_DISABLED
       RFLink::Portal::init();
-      #endif // RFLINK_PORTAL_DISABLED
       #ifndef RFLINK_MQTT_DISABLED
       RFLink::Mqtt::setup_MQTT();
       #endif // RFLINK_MQTT_DISABLED
       RFLink::Serial2Net::setup();
-#endif // RFLINK_WIFI_ENABLED
 
 
       PluginInit();
       PluginTXInit();
 
       Radio::set_Radio_mode(Radio::Radio_OFF);
-
-#if defined(ESP8266) || defined(ESP32)
       Radio::show_Radio_Pin();
-#endif // ESP8266 || ESP32
 
 
 #ifdef MQTT_ENABLED
@@ -131,15 +109,8 @@ namespace RFLink {
       pbuffer[0] = 0;
       Radio::set_Radio_mode(Radio::Radio_RX);
 
-
-#ifdef RFLINK_WIFI_ENABLED
-  #ifndef RFLINK_PORTAL_DISABLED
       RFLink::Portal::start();
-  #endif // RFLINK_PORTAL_DISABLED
-#ifndef RFLINK_SERIAL2NET_DISABLED
       RFLink::Serial2Net::setup();
-#endif // !RFLINK_SERIAL2NET_DISABLED
-#endif
     }
 
     void mainLoop() {
@@ -147,14 +118,9 @@ namespace RFLink {
       RFLink::Mqtt::checkMQTTloop();
       #endif // RFLINK_MQTT_DISABLED
       RFLink::sendMsgFromBuffer();
-
-#if defined(RFLINK_WIFI_ENABLED)
       RFLink::Wifi::mainLoop();
-#endif
 
-#ifndef RFLINK_SERIAL2NET_DISABLED
       RFLink::Serial2Net::serverLoop();
-#endif // !RFLINK_SERIAL2NET_DISABLED
 
 #if defined(SERIAL_ENABLED)
       readSerialAndExecute();
@@ -186,10 +152,7 @@ namespace RFLink {
         RFLink::Mqtt::publishMsg();
 #endif // !RFLINK_MQTT_DISABLED
 
-
-#ifndef RFLINK_SERIAL2NET_DISABLED
         RFLink::Serial2Net::broadcastMessage(pbuffer);
-#endif // !RFLINK_SERIAL2NET_DISABLED
 
         pbuffer[0] = 0;
       }
@@ -203,11 +166,9 @@ namespace RFLink {
         if(end_of_line)
           Serial.println();
 #endif
-#ifndef RFLINK_SERIAL2NET_DISABLED
         RFLink::Serial2Net::broadcastMessage(buf);
         if(end_of_line)
           RFLink::Serial2Net::broadcastMessage(F("\r\n"));
-#endif // !RFLINK_SERIAL2NET_DISABLED
 
       }
     }
@@ -217,9 +178,7 @@ namespace RFLink {
 #ifdef SERIAL_ENABLED
       Serial.print(n);
 #endif
-#ifndef RFLINK_SERIAL2NET_DISABLED
       RFLink::Serial2Net::broadcastMessage(String(n).c_str());
-#endif // !RFLINK_SERIAL2NET_DISABLED
     }
 
     void sendRawPrint(unsigned long n)
@@ -227,9 +186,7 @@ namespace RFLink {
 #ifdef SERIAL_ENABLED
       Serial.print(n);
 #endif
-#ifndef RFLINK_SERIAL2NET_DISABLED
       RFLink::Serial2Net::broadcastMessage(String(n).c_str());
-#endif // !RFLINK_SERIAL2NET_DISABLED
     }
 
     void sendRawPrint(int n)
@@ -237,9 +194,7 @@ namespace RFLink {
 #ifdef SERIAL_ENABLED
       Serial.print(n);
 #endif
-#ifndef RFLINK_SERIAL2NET_DISABLED
       RFLink::Serial2Net::broadcastMessage(String(n).c_str());
-#endif // !RFLINK_SERIAL2NET_DISABLED
     }
 
     void sendRawPrint(unsigned int n)
@@ -247,9 +202,7 @@ namespace RFLink {
 #ifdef SERIAL_ENABLED
       Serial.print(n);
 #endif
-#ifndef RFLINK_SERIAL2NET_DISABLED
       RFLink::Serial2Net::broadcastMessage(String(n).c_str());
-#endif // !RFLINK_SERIAL2NET_DISABLED
     }
 
   void sendRawPrint(float f)
@@ -257,9 +210,7 @@ namespace RFLink {
 #ifdef SERIAL_ENABLED
     Serial.print(f);
 #endif
-#ifndef RFLINK_SERIAL2NET_DISABLED
     RFLink::Serial2Net::broadcastMessage(String(f).c_str());
-#endif // !RFLINK_SERIAL2NET_DISABLED
   }
 
     void sendRawPrint(char c)
@@ -267,9 +218,7 @@ namespace RFLink {
 #ifdef SERIAL_ENABLED
       Serial.write(c);
 #endif
-#ifndef RFLINK_SERIAL2NET_DISABLED
       RFLink::Serial2Net::broadcastMessage(c);
-#endif // !RFLINK_SERIAL2NET_DISABLED
     }
 
     void sendRawPrint(const __FlashStringHelper *buf, bool end_of_line){
@@ -278,11 +227,9 @@ namespace RFLink {
       if(end_of_line)
         Serial.println();
       #endif
-      #ifndef RFLINK_SERIAL2NET_DISABLED
       RFLink::Serial2Net::broadcastMessage(buf);
       if(end_of_line)
         RFLink::Serial2Net::broadcastMessage(F("\r\n"));
-      #endif // !RFLINK_SERIAL2NET_DISABLED
     };
 
     /**
@@ -423,13 +370,6 @@ namespace RFLink {
       char buffer[90];
       struct timeval now;
 
-      #ifdef ESP8266
-      // Little Patch to get the right boot time when connected to wifi ... Bug ?
-      if (timeAtBoot.tv_sec == 0) {
-        gettimeofday(&timeAtBoot, NULL);
-      }
-      #endif
-
       if (gettimeofday(&now, NULL) != 0) {
         RFLink::sendRawPrint(F("Failed to obtain time"));
       }
@@ -437,15 +377,8 @@ namespace RFLink {
       output["uptime"] = now.tv_sec - timeAtBoot.tv_sec;
 
       output["heap_free"] = ESP.getFreeHeap();
-      #ifdef ESP32
       output["heap_min_free"] = ESP.getMinFreeHeap();
       output["heap_max_alloc"] = ESP.getMaxAllocHeap();
-      #endif
-#ifdef ESP8266
-      output["heap_frag"] = ESP.getHeapFragmentation();
-      output["stack_free_cont"] = ESP.getFreeContStack();
-      output["free_block_max_size"] = ESP.getMaxFreeBlockSize();
-#endif
 
       sprintf_P(buffer, PSTR("RFLink_ESP_%d.%d-%s"), BUILDNR, REVNR, PSTR(RFLINK_BUILDNAME));
       output["sw_version"] = buffer;

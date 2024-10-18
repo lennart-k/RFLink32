@@ -1,15 +1,6 @@
-#ifndef _10_WiFi_H
-#define _10_WiFi_H
-
+#pragma once
 #include "RFLink.h"
-
-#ifdef RFLINK_WIFI_ENABLED
-#ifdef ESP8266
-#include "ESP8266WiFi.h"
-#else
 #include "WiFi.h"
-#endif
-#endif
 
 #include "11_Config.h"
 
@@ -40,6 +31,3 @@ namespace RFLink {
         void checkForUpdateAndApply();
     }
 }
-
-#endif //_10_WiFi_H
-

@@ -4,10 +4,7 @@
 // * 2018..2020 Stormteam - Marc RIVES * //
 // * More details in RFLink.ino file   * //
 // ************************************* //
-
-#ifndef Plugin_h
-#define Plugin_h
-
+#pragma once
 #include <Arduino.h>
 
 #define PLUGIN_MAX 84    // Maximum number of Receive plugins
@@ -44,5 +41,3 @@ byte PluginInitCall(byte Function, char *str);
 byte PluginTXInitCall(byte Function, char *str);
 byte PluginRXCall(byte Function, const char *str);
 byte PluginTXCall(byte Function, const char *str);
-
-#endif

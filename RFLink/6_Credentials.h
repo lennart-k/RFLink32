@@ -4,10 +4,7 @@
 // * 2018..2020 Stormteam - Marc RIVES * //
 // * More details in RFLink.ino file   * //
 // ************************************* //
-
-#ifndef CREDENTIALS_h
-#define CREDENTIALS_h
-
+#pragma once
 #include "RFLink.h"
 
 // MQTT Server
@@ -32,5 +29,3 @@ MIID (...)
 -----END CERTIFICATE-----
 )EOF";
 #endif //CHECK_CACERT
-
-#endif

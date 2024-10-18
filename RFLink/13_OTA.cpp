@@ -2,15 +2,8 @@
 
 #include "RFLink.h"
 
-#ifdef ESP32
 #include <HTTPClient.h>
 #include <HTTPUpdate.h>
-#elif defined(ESP8266)
-#include <ESP8266HTTPClient.h>
-#include <ESP8266httpUpdate.h>
-#define httpUpdate ESPhttpUpdate
-#endif
-
 #include <asyncHTTPrequest.h>
 #include <Ticker.h>
 

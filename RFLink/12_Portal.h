@@ -1,9 +1,5 @@
-#ifndef _12_PORTAL_H_
-#define _12_PORTAL_H_
-
+#pragma once
 #include "RFLink.h"
-
-#ifndef RFLINK_PORTAL_DISABLED
 
 #include "11_Config.h"
 
@@ -22,7 +18,3 @@ namespace RFLink {
         void refreshParametersFromConfig(bool triggerChanges=true);
     }
 }
-
-#endif // RFLINK_PORTAL_DISABLED
-
-#endif

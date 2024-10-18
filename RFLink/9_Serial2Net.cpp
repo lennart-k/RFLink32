@@ -1,9 +1,5 @@
 #include "9_Serial2Net.h"
 #include "RFLink.h"
-
-#ifndef RFLINK_SERIAL2NET_DISABLED
-
-
 #include <WiFiClient.h>
 #include <WiFiServer.h>
 #include <lwip/sockets.h>
@@ -14,11 +10,7 @@ namespace RFLink {
     class Serial2NetClient : public WiFiClient {
 
     private:
-      #ifdef ESP32
       static const uint16_t __buffer_size = 1024;
-      #else
-      static const uint16_t __buffer_size = 256;
-      #endif
       uint16_t buffer_end;
 
     public:
@@ -41,16 +33,11 @@ namespace RFLink {
         int keepIdle = 30;
         int keepInterval = 3;
         int keepCount = 3;
-
-        #ifdef ESP8266
-        this->keepAlive(keepIdle, keepInterval, keepCount);
-        #else
         int keepAlive = 1;
         setSocketOption(SO_KEEPALIVE, (char *) &keepAlive, sizeof(keepAlive));
         setOption(TCP_KEEPIDLE, &keepIdle);
         setOption(TCP_KEEPINTVL, &keepInterval);
         setOption(TCP_KEEPCNT, &keepCount);
-        #endif
 
         println(F("This is RFLink32, welcome!"));
       }
@@ -305,5 +292,3 @@ namespace RFLink {
 
   } // end Serial2Net namespace
 } // end of RFLink namespace
-
-#endif // !RFLINK_SERIAL2NET_DISABLED
