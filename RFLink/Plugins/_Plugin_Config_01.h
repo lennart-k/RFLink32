@@ -12,9 +12,7 @@
 // When needed additional plugins can be added or selected plugins can be enabled/disabled.
 //
 // BEWARE OF THE PLUGIN_MAX setting!!       TX: 51      RX: 24
-
-#ifndef _RFLINK_PLUGIN_CONFIG_01_H_
-#define _RFLINK_PLUGIN_CONFIG_01_H_
+#pragma once
 
 #include "2_Signal.h"
 #include "1_Radio.h"
@@ -147,5 +145,3 @@
 // -------------------
 //       -=#=-
 // -------------------
-
-#endif // _RFLINK_PLUGIN_CONFIG_01_H_

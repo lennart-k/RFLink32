@@ -99,6 +99,7 @@ namespace RFLink {
 
     void paramsUpdatedCallback();
     void refreshParametersFromConfig(bool triggerChanges=true);
+    void setup();
     void RawSendRF(RawSignalStruct *signal);
     void AC_Send(unsigned long data, byte cmd);
 

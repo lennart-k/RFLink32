@@ -86,6 +86,7 @@ namespace RFLink {
 
       RFLink::Config::setup();
       RFLink::Radio::setup();
+      RFLink::Signal::setup();
 
       RFLink::Wifi::setup();
       RFLink::Portal::init();

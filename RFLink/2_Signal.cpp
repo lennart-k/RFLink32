@@ -193,6 +193,11 @@ namespace RFLink
       }
     }
 
+    void setup()
+    {
+      refreshParametersFromConfig();
+    }
+
     boolean ScanEvent()
     {
       if (Radio::current_State != Radio::States::Radio_RX)
