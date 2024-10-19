@@ -45,14 +45,9 @@ void display_SET_LEVEL(byte);
 void display_TEMP(unsigned int);
 void display_HUM(byte);
 void display_BARO(unsigned int);
-void display_HSTATUS(byte);
-void display_BFORECAST(byte);
 void display_UV(unsigned int);
-void display_LUX(unsigned int);
 void display_BAT(boolean);
 void display_RAIN(unsigned int);
-void display_RAINTOT(unsigned int);
-void display_RAINRATE(unsigned int);
 void display_WINSP(unsigned int);
 void display_AWINSP(unsigned int);
 void display_WINGS(unsigned int);
@@ -71,16 +66,6 @@ enum PIR_OnOff
     PIR_Off,
     PIR_On
 };
-void display_PIR(boolean);
-void display_CO2(unsigned int);
-void display_SOUND(unsigned int);
-void display_KWATT(unsigned int);
-void display_WATT(unsigned int);
-void display_CURRENT(unsigned int);
-void display_DIST(unsigned int);
-void display_METER(unsigned int);
-void display_VOLT(unsigned int);
-void display_RGBW(unsigned int);
 void display_DEBUG(byte data[], unsigned int size);
 
 // These functions are here to help writing the emitting part of a plugin by interpreting the received command

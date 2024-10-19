@@ -34,12 +34,9 @@
 #define PLUGIN_006 // Blyss
 #define PLUGIN_007 // Conrad RSL2
 #define PLUGIN_008 // Kambrook
-#define PLUGIN_009 // X10 RF
-#define PLUGIN_010 // TRC02 RGB Switch
 #define PLUGIN_011 // Home Confort
 #define PLUGIN_012 // Flamingo FA500R
 #define PLUGIN_013 // Powerfix/Quigg
-#define PLUGIN_014 // Ikea Koppla
 #define PLUGIN_015 // Home Easy EU
 // -------------------
 // Weather sensors
@@ -48,12 +45,8 @@
 #define PLUGIN_030 // Alecto V1 (WS3500) 434 MHz.
 #define PLUGIN_031 // Alecto V3 (WS1100/WS1200/WSD-19) 433.9 MHz.
 #define PLUGIN_032 // Alecto V4
-#define PLUGIN_033 // Conrad Pool Thermometer
-#define PLUGIN_034 // Cresta
-#define PLUGIN_035 // Imagintronix
 #define PLUGIN_036 // F007_TH
 #define PLUGIN_037 // Accurite 986 Thermometer
-#define PLUGIN_040 // Mebus
 #define PLUGIN_041 // LaCrosse v3 ws7000
 #define PLUGIN_042 // UPM/Esic
 #define PLUGIN_043 // LaCrosse v1
@@ -61,15 +54,12 @@
 #define PLUGIN_045 // Auriol
 #define PLUGIN_046 // Auriol v2 / Xiron
 #define PLUGIN_047 // Auriol v4
-#define PLUGIN_048 // Oregon Weather
 #define PLUGIN_049 // Lacrosse TX141
 #define PLUGIN_050 // FineOffset WH2 / ClimeMet CM9088 Temperature/Humidity
 // -------------------
 // Smoke detectors / Fire Places
 // -------------------
 #define PLUGIN_080 // Flamingo FA20 / KD101 smoke detector
-#define PLUGIN_081 // Mertik Maxitrol / Dru fireplace
-#define PLUGIN_082 // Mertik Maxitrol / Dru fireplace
 // -------------------
 // 868 MHZ
 // -------------------
@@ -92,7 +82,6 @@
 // #define PLUGIN_TX_006           // Blyss
 // #define PLUGIN_TX_007           // Conrad RSL2
 // #define PLUGIN_TX_008           // Kambrook
-#define PLUGIN_TX_009           // X10 RF
 // #define PLUGIN_TX_010		   // TRC02 RGB switch
 // #define PLUGIN_TX_011           // Home Confort
 // #define PLUGIN_TX_012           // Flamingo FA500R  (11)

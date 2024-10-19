@@ -233,6 +233,18 @@ using namespace RFLink::Radio;
 #ifdef PLUGIN_003
 #include "../4_Display.h"
 
+namespace Entity {
+   struct Switch {
+      String unique_id;
+   };
+
+   enum SwitchState {
+      Off = 0,
+      On = 1,
+      Unknown = -1
+   };
+}
+
 boolean Plugin_003(byte function, const char *string)
 {
    if (RawSignal.Number != (KAKU_CodeLength * 4) + 2)

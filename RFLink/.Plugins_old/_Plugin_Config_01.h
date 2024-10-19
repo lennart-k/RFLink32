@@ -62,7 +62,6 @@
 #define PLUGIN_045 // Auriol
 #define PLUGIN_046 // Auriol v2 / Xiron
 #define PLUGIN_047 // Auriol v4
-#define PLUGIN_048 // Oregon Weather
 #define PLUGIN_049 // Lacrosse TX141
 #define PLUGIN_050 // FineOffset WH2 / ClimeMet CM9088 Temperature/Humidity
 // -------------------

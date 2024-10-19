@@ -67,14 +67,6 @@ boolean QRFUDebug = QRFUDebug_0; // debug RF signals with plugin 254 but no mult
 #include "./Plugins/Plugin_008.c"
 #endif
 
-#ifdef PLUGIN_009
-#include "./Plugins/Plugin_009.c"
-#endif
-
-#ifdef PLUGIN_010
-#include "./Plugins/Plugin_010.c"
-#endif
-
 #ifdef PLUGIN_011
 #include "./Plugins/Plugin_011.c"
 #endif
@@ -85,10 +77,6 @@ boolean QRFUDebug = QRFUDebug_0; // debug RF signals with plugin 254 but no mult
 
 #ifdef PLUGIN_013
 #include "./Plugins/Plugin_013.c"
-#endif
-
-#ifdef PLUGIN_014
-#include "./Plugins/Plugin_014.c"
 #endif
 
 #ifdef PLUGIN_015
@@ -111,28 +99,12 @@ boolean QRFUDebug = QRFUDebug_0; // debug RF signals with plugin 254 but no mult
 #include "./Plugins/Plugin_032.c"
 #endif
 
-#ifdef PLUGIN_033
-#include "./Plugins/Plugin_033.c"
-#endif
-
-#ifdef PLUGIN_034
-#include "./Plugins/Plugin_034.c"
-#endif
-
-#ifdef PLUGIN_035
-#include "./Plugins/Plugin_035.c"
-#endif
-
 #ifdef PLUGIN_036
 #include "./Plugins/Plugin_036.c"
 #endif
 
 #ifdef PLUGIN_037
 #include "./Plugins/Plugin_037.c"
-#endif
-
-#ifdef PLUGIN_040
-#include "./Plugins/Plugin_040.c"
 #endif
 
 #ifdef PLUGIN_041
@@ -163,10 +135,6 @@ boolean QRFUDebug = QRFUDebug_0; // debug RF signals with plugin 254 but no mult
 #include "./Plugins/Plugin_047.c"
 #endif
 
-#ifdef PLUGIN_048
-#include "./Plugins/Plugin_048.c"
-#endif
-
 #ifdef PLUGIN_049
 #include "./Plugins/Plugin_049.c"
 #endif
@@ -177,14 +145,6 @@ boolean QRFUDebug = QRFUDebug_0; // debug RF signals with plugin 254 but no mult
 
 #ifdef PLUGIN_080
 #include "./Plugins/Plugin_080.c"
-#endif
-
-#ifdef PLUGIN_081
-#include "./Plugins/Plugin_081.c"
-#endif
-
-#ifdef PLUGIN_082
-#include "./Plugins/Plugin_082.c"
 #endif
 
 #ifdef PLUGIN_254
@@ -250,16 +210,6 @@ void PluginInit(void)
   Plugin_ptr[x++] = &Plugin_008;
 #endif
 
-#ifdef PLUGIN_009
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_009;
-#endif
-
-#ifdef PLUGIN_010
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_010;
-#endif
-
 #ifdef PLUGIN_011
   Plugin_State[x] = P_Enabled;
   Plugin_ptr[x++] = &Plugin_011;
@@ -273,11 +223,6 @@ void PluginInit(void)
 #ifdef PLUGIN_013
   Plugin_State[x] = P_Enabled;
   Plugin_ptr[x++] = &Plugin_013;
-#endif
-
-#ifdef PLUGIN_014
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_014;
 #endif
 
 #ifdef PLUGIN_015
@@ -305,21 +250,6 @@ void PluginInit(void)
   Plugin_ptr[x++] = &Plugin_032;
 #endif
 
-#ifdef PLUGIN_033
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_033;
-#endif
-
-#ifdef PLUGIN_034
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_034;
-#endif
-
-#ifdef PLUGIN_035
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_035;
-#endif
-
 #ifdef PLUGIN_036
   Plugin_State[x] = P_Enabled;
   Plugin_ptr[x++] = &Plugin_036;
@@ -328,11 +258,6 @@ void PluginInit(void)
 #ifdef PLUGIN_037
   Plugin_State[x] = P_Enabled;
   Plugin_ptr[x++] = &Plugin_037;
-#endif
-
-#ifdef PLUGIN_040
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_040;
 #endif
 
 #ifdef PLUGIN_041
@@ -370,11 +295,6 @@ void PluginInit(void)
   Plugin_ptr[x++] = &Plugin_047;
 #endif
 
-#ifdef PLUGIN_048
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_048;
-#endif
-
 #ifdef PLUGIN_049
   Plugin_State[x] = P_Enabled;
   Plugin_ptr[x++] = &Plugin_049;
@@ -388,16 +308,6 @@ void PluginInit(void)
 #ifdef PLUGIN_080
   Plugin_State[x] = P_Enabled;
   Plugin_ptr[x++] = &Plugin_080;
-#endif
-
-#ifdef PLUGIN_081
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_081;
-#endif
-
-#ifdef PLUGIN_082
-  Plugin_State[x] = P_Enabled;
-  Plugin_ptr[x++] = &Plugin_082;
 #endif
 
   // Initialiseer alle plugins door aanroep met verwerkingsparameter PLUGIN_INIT
@@ -458,16 +368,6 @@ void PluginTXInit(void)
   PluginTX_ptr[x++] = &PluginTX_008;
 #endif
 
-#ifdef PLUGIN_TX_009
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_009;
-#endif
-
-#ifdef PLUGIN_TX_010
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_010;
-#endif
-
 #ifdef PLUGIN_TX_011
   PluginTX_State[x] = P_Enabled;
   PluginTX_ptr[x++] = &PluginTX_011;
@@ -481,11 +381,6 @@ void PluginTXInit(void)
 #ifdef PLUGIN_TX_013
   PluginTX_State[x] = P_Enabled;
   PluginTX_ptr[x++] = &PluginTX_013;
-#endif
-
-#ifdef PLUGIN_TX_014
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_014;
 #endif
 
 #ifdef PLUGIN_TX_015
@@ -568,21 +463,6 @@ void PluginTXInit(void)
   PluginTX_ptr[x++] = &PluginTX_032;
 #endif
 
-#ifdef PLUGIN_TX_033
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_033;
-#endif
-
-#ifdef PLUGIN_TX_034
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_034;
-#endif
-
-#ifdef PLUGIN_TX_035
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_035;
-#endif
-
 #ifdef PLUGIN_TX_036
   PluginTX_State[x] = P_Enabled;
   PluginTX_ptr[x++] = &PluginTX_036;
@@ -601,11 +481,6 @@ void PluginTXInit(void)
 #ifdef PLUGIN_TX_039
   PluginTX_State[x] = P_Enabled;
   PluginTX_ptr[x++] = &PluginTX_039;
-#endif
-
-#ifdef PLUGIN_TX_040
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_040;
 #endif
 
 #ifdef PLUGIN_TX_041
@@ -643,11 +518,6 @@ void PluginTXInit(void)
   PluginTX_ptr[x++] = &PluginTX_047;
 #endif
 
-#ifdef PLUGIN_TX_048
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_048;
-#endif
-
 #ifdef PLUGIN_TX_049
   PluginTX_State[x] = P_Enabled;
   PluginTX_ptr[x++] = &PluginTX_049;
@@ -661,16 +531,6 @@ void PluginTXInit(void)
 #ifdef PLUGIN_TX_080
   PluginTX_State[x] = P_Enabled;
   PluginTX_ptr[x++] = &PluginTX_080;
-#endif
-
-#ifdef PLUGIN_TX_081
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_081;
-#endif
-
-#ifdef PLUGIN_TX_082
-  PluginTX_State[x] = P_Enabled;
-  PluginTX_ptr[x++] = &PluginTX_082;
 #endif
 
 #ifdef PLUGIN_TX_254

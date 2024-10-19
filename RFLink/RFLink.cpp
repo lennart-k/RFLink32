@@ -30,10 +30,7 @@
 #include "11_Config.h"
 #include "12_Portal.h"
 #include "13_OTA.h"
-
-#if (defined(__AVR_ATmega328P__) || defined(__AVR_ATmega2560__))
-#include <avr/power.h>
-#endif
+#include "ha_mqtt.hpp"
 
 //****************************************************************************************************************************************
 void sendMsgFromBuffer(); // See at bottom

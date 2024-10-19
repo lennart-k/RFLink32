@@ -18,10 +18,6 @@ char pbuffer[PRINT_BUFFER_SIZE]; // Buffer for complete message data
 // Display shared func //
 // ------------------- //
 
-#if (defined(__AVR_ATmega328P__) || defined(__AVR_ATmega2560__))
-#error "For AVR plaforms, in all sprintf_P above, please replace %s with %S"
-#endif
-
 // Common Header
 void display_Header(void)
 {
@@ -172,31 +168,10 @@ void display_BARO(unsigned int input)
   strcat(pbuffer, dbuffer);
 }
 
-// HSTATUS=99 => 0=Normal, 1=Comfortable, 2=Dry, 3=Wet
-void display_HSTATUS(byte input)
-{
-  sprintf_P(dbuffer, PSTR("%s%02x"), PSTR(";HSTATUS="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// BFORECAST=99 => 0=No Info/Unknown, 1=Sunny, 2=Partly Cloudy, 3=Cloudy, 4=Rain
-void display_BFORECAST(byte input)
-{
-  sprintf_P(dbuffer, PSTR("%s%02x"), PSTR(";BFORECAST="), input);
-  strcat(pbuffer, dbuffer);
-}
-
 // UV=9999 => UV intensity (hexadecimal)
 void display_UV(unsigned int input)
 {
   sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";UV="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// LUX=9999 => Light intensity (hexadecimal)
-void display_LUX(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";LUX="), input);
   strcat(pbuffer, dbuffer);
 }
 
@@ -214,20 +189,6 @@ void display_BAT(boolean input)
 void display_RAIN(unsigned int input)
 {
   sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";RAIN="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// RAINTOT=1234 => Total rain in mm. (hexadecimal) 0x8d = 141 decimal = 14.1 mm (needs division by 10)
-void display_RAINTOT(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";RAINTOT="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// RAINRATE=1234 => Rain rate in mm. (hexadecimal) 0x8d = 141 decimal = 14.1 mm (needs division by 10)
-void display_RAINRATE(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";RAINRATE="), input);
   strcat(pbuffer, dbuffer);
 }
 
@@ -289,80 +250,6 @@ void display_SMOKEALERT(boolean input)
     sprintf_P(dbuffer, PSTR("%s"), PSTR(";SMOKEALERT=OFF"));
   strcat(pbuffer, dbuffer);
 }
-
-// PIR=ON => ON/OFF
-void display_PIR(boolean input)
-{
-  if (input == PIR_On)
-    sprintf_P(dbuffer, PSTR("%s"), PSTR(";PIR=ON"));
-  else
-    sprintf_P(dbuffer, PSTR("%s"), PSTR(";PIR=OFF"));
-  strcat(pbuffer, dbuffer);
-}
-
-// CO2=1234 => CO2 air quality
-void display_CO2(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04d"), PSTR(";CO2="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// SOUND=1234 => Noise level
-void display_SOUND(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04d"), PSTR(";SOUND="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// KWATT=9999 => KWatt (hexadecimal)
-void display_KWATT(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";KWATT="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// WATT=9999 => Watt (hexadecimal)
-void display_WATT(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";WATT="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// CURRENT=1234 => Current phase 1
-void display_CURRENT(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04d"), PSTR(";CURRENT="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// DIST=1234 => Distance
-void display_DIST(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04d"), PSTR(";DIST="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// METER=1234 => Meter values (water/electricity etc.)
-void display_METER(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04d"), PSTR(";METER="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// VOLT=1234 => Voltage
-void display_VOLT(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04d"), PSTR(";VOLT="), input);
-  strcat(pbuffer, dbuffer);
-}
-
-// RGBW=9999 => Milight: provides 1 byte color and 1 byte brightness value
-void display_RGBW(unsigned int input)
-{
-  sprintf_P(dbuffer, PSTR("%s%04x"), PSTR(";RGBW="), input);
-  strcat(pbuffer, dbuffer);
-}
-
 
 // Channel
 void display_CHAN(byte channel)
